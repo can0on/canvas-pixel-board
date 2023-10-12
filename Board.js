@@ -14,7 +14,7 @@ class Board
         this.#ctx = this.#canvas.getContext("2d");
         this.#ctx.fillStyle = "#1b1b1b";
         this.#ctx.fillRect(0, 0, this.width, this.height);
-        this.pixel = 5;
+        this.pixel = 10;
         this.padding = this.pixel * 2;
         this.xPos = this.padding;
         this.yPos = this.padding;
@@ -729,7 +729,6 @@ class Board
             }
         }
     }
-
     #countWordWidth(word)
     {
         let width = 0;
@@ -740,5 +739,3 @@ class Board
         return width;
     }
 }
-const board = new Board("canvas");
-board.drawText("LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY", "red", true);
