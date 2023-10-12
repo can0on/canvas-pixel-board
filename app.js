@@ -1,31 +1,31 @@
-class Table
+class Board
 {
-    constructor(id){
-        this.canvas = document.getElementById(id);
-        /** @type {CanvasRenderingContext2D} */
-        this.ctx = canvas.getContext("2d");
-        this.ctx.fillStyle = "#1b1b1b";
-        this.ctx.fillRect(0, 0, 500, 500);
-        this.pixel = 6;
-        this.x = this.pixel * 1;
-        this.y = this.pixel * 1;
+    #alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ';
+    #letterWidth = '4444444403444464644444444541444444443';
+    #alphabetMapping = {};
+    #canvas;
+    #ctx;
 
-        this.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ';
-        this.letterWidth = '4444444403444464644444444541444444443';
-        this.alphabetMapping = {};
-        for (let i = 0; i < this.alphabet.length; i++) {
-            this.alphabetMapping[this.alphabet[i]] = Number(this.letterWidth[i]);
+    constructor(id){
+        this.#canvas = document.getElementById(id);
+        /** @type {CanvasRenderingContext2D} */
+        this.#ctx = this.#canvas.getContext("2d");
+        this.#ctx.fillStyle = "#1b1b1b";
+        this.#ctx.fillRect(0, 0, 500, 500);
+        this.pixel = 6;
+        this.xPos = this.pixel * 1;
+        this.yPos = this.pixel * 1;
+        this.width = this.#canvas.width;
+        this.height = this.#canvas.height;
+
+        // Mapping alphabet letters with their respective widths
+        for (let i = 0; i < this.#alphabet.length; i++) {
+            this.#alphabetMapping[this.#alphabet[i]] = Number(this.#letterWidth[i]);
         }
     }
-
-    point()
-    {
-        this.drawText('JAK TAM')
-    }
-
     drawPixel(x, y)
     {
-        this.ctx.fillRect(x * this.pixel + this.x, y * this.pixel + this.y, this.pixel, this.pixel);
+        this.#ctx.fillRect(x * this.pixel + this.xPos, y * this.pixel + this.yPos, this.pixel, this.pixel);
     }
     drawChar(char)
     {
@@ -692,14 +692,13 @@ class Table
 
     drawText(text, color = 'white')
     {
-        this.ctx.fillStyle = color;
+        this.#ctx.fillStyle = color;
         for (let i = 0; i < text.length; i++)
         {
-            console.log(this.x)
             this.drawChar(text[i]);
-            this.x += this.pixel * (this.alphabetMapping[text[i]] + 2);
+            this.xPos += this.pixel * (this.#alphabetMapping[text[i]] + 2);
         }
     }
 }
-const tab = new Table("canvas");
-tab.point();
+const board = new Board("canvas");
+board.drawText("WIKTOR", "red");
