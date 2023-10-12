@@ -1,7 +1,7 @@
 class Board
 {
-    #alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ';
-    #letterWidth = '4444444403444464644444444541444444443';
+    #alphabet =    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,';
+    #letterWidth = '44444444034444646444444445443433330220533334234242234144444444301';
     #alphabetMapping = {};
     #canvas;
     #ctx;
@@ -14,7 +14,8 @@ class Board
         this.#ctx = this.#canvas.getContext("2d");
         this.#ctx.fillStyle = "#1b1b1b";
         this.#ctx.fillRect(0, 0, this.width, this.height);
-        this.pixel = 10;
+        this.pixel = 3;
+        this.lineSpacing = 10;
         this.padding = this.pixel * 2;
         this.xPos = this.padding;
         this.yPos = this.padding;
@@ -33,6 +34,13 @@ class Board
         switch (char)
         {
             case ' ':
+                break;
+            case '.':
+                this.drawPixel(0, 7);
+                break;
+            case ',':
+                this.drawPixel(0, 7);
+                this.drawPixel(1, 6);
                 break;
             case 'A':
                 this.drawPixel(2, 0);
@@ -508,6 +516,308 @@ class Board
                 this.drawPixel(4, 7);
                 this.drawPixel(5, 7);
                 break;
+            case 'a':
+                this.drawPixel(0, 6);
+                this.drawPixel(0, 5);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 4);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(4, 7);
+                this.drawPixel(3, 4);
+                break;
+            case 'b':
+                this.drawPixel(1, 0);
+                this.drawPixel(1, 1);
+                this.drawPixel(1, 2);
+                this.drawPixel(1, 3);
+                this.drawPixel(1, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(0, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(3, 7);
+                this.drawPixel(4, 6);
+                this.drawPixel(4, 5);
+                this.drawPixel(4, 4);
+                this.drawPixel(3, 3);
+                this.drawPixel(2, 3);
+                break;
+            case 'c':
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 4);
+                break;
+            case 'd':
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(1, 3);
+                this.drawPixel(2, 3);
+                this.drawPixel(3, 0);
+                this.drawPixel(3, 1);
+                this.drawPixel(3, 2);
+                this.drawPixel(3, 3);
+                this.drawPixel(3, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(4, 7);
+                break;
+            case 'e':
+                this.drawPixel(2, 7);
+                this.drawPixel(1, 7);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 5);
+                this.drawPixel(2, 5);
+                this.drawPixel(0, 5);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 5);
+                break;
+            case 'f':
+                this.drawPixel(2, 0);
+                this.drawPixel(1, 1);
+                this.drawPixel(1, 2);
+                this.drawPixel(0, 3);
+                this.drawPixel(1, 3);
+                this.drawPixel(2, 3);
+                this.drawPixel(1, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(3, 1);
+                break;
+            case 'g':
+                this.drawPixel(0, 5);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(2, 6);
+                this.drawPixel(3, 7);
+                this.drawPixel(2, 8);
+                this.drawPixel(1, 8);
+                break;
+            case 'h':
+                this.drawPixel(0, 7);
+                this.drawPixel(0, 6);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 3);
+                this.drawPixel(0, 2);
+                this.drawPixel(0, 1);
+                this.drawPixel(0, 0);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 3);
+                this.drawPixel(3, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(3, 7);
+                break;
+            case 'i':
+                this.drawPixel(0, 7);
+                this.drawPixel(0, 6);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 3);
+                this.drawPixel(0, 1);
+                break;
+            case 'j':
+                this.drawPixel(2, 1);
+                this.drawPixel(2, 3);
+                this.drawPixel(2, 4);
+                this.drawPixel(2, 5);
+                this.drawPixel(2, 6);
+                this.drawPixel(2, 7);
+                this.drawPixel(0, 7);
+                this.drawPixel(1, 8);
+                break;
+            case 'k':
+                this.drawPixel(0, 7);
+                this.drawPixel(0, 6);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 3);
+                this.drawPixel(0, 2);
+                this.drawPixel(0, 1);
+                this.drawPixel(0, 0);
+                this.drawPixel(1, 5);
+                this.drawPixel(2, 4);
+                this.drawPixel(2, 6);
+                this.drawPixel(2, 7);
+                break;
+            case 'l':
+                this.drawPixel(0, 0);
+                this.drawPixel(0, 1);
+                this.drawPixel(0, 2);
+                this.drawPixel(0, 3);
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(0, 7);
+                break;
+            case 'm':
+                this.drawPixel(0, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(3, 7);
+                this.drawPixel(4, 4);
+                this.drawPixel(5, 4);
+                this.drawPixel(5, 5);
+                this.drawPixel(5, 6);
+                this.drawPixel(5, 7);
+                break;
+            case 'n':
+                this.drawPixel(0, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(3, 7);
+                break;
+            case 'o':
+                this.drawPixel(0, 6);
+                this.drawPixel(0, 5);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(2, 7);
+                this.drawPixel(1, 7);
+                break;
+            case 'p':
+                this.drawPixel(0, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 6);
+                this.drawPixel(1, 6);
+                this.drawPixel(2, 7);
+                this.drawPixel(1, 7);
+                this.drawPixel(1, 8);
+                break;
+            case 'q':
+                this.drawPixel(3, 4);
+                this.drawPixel(1, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(2, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(2, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(2, 8);
+                break;
+            case 'r':
+                this.drawPixel(0, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 4);
+                this.drawPixel(4, 5);
+                break;
+            case 's':
+                this.drawPixel(0, 5);
+                this.drawPixel(1, 4);
+                this.drawPixel(2, 5);
+                this.drawPixel(2, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(0, 7);
+                break;
+            case 't':
+                this.drawPixel(1, 0);
+                this.drawPixel(1, 1);
+                this.drawPixel(1, 2);
+                this.drawPixel(1, 3);
+                this.drawPixel(1, 4);
+                this.drawPixel(1, 5);
+                this.drawPixel(1, 6);
+                this.drawPixel(2, 7);
+                this.drawPixel(3, 7);
+                this.drawPixel(0, 3);
+                this.drawPixel(2, 3);
+                break;
+            case 'u':
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(3, 6);
+                this.drawPixel(3, 5);
+                this.drawPixel(3, 4);
+                this.drawPixel(4, 7);
+                break;
+            case 'v':
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 6);
+                this.drawPixel(2, 5);
+                this.drawPixel(2, 4);
+                break;
+            case 'w':
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 7);
+                this.drawPixel(2, 6);
+                this.drawPixel(2, 5);
+                this.drawPixel(3, 7);
+                this.drawPixel(4, 6);
+                this.drawPixel(4, 5);
+                this.drawPixel(4, 4);
+                break;
+            case 'x':
+                this.drawPixel(0, 7);
+                this.drawPixel(1, 6);
+                this.drawPixel(2, 7);
+                this.drawPixel(2, 5);
+                this.drawPixel(2, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 4);
+                break;
+            case 'y':
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 5);
+                this.drawPixel(1, 5);
+                this.drawPixel(2, 5);
+                this.drawPixel(2, 4);
+                this.drawPixel(2, 6);
+                this.drawPixel(2, 7);
+                this.drawPixel(0, 7);
+                this.drawPixel(1, 8);
+                break;
+            case 'z':
+                this.drawPixel(3, 7);
+                this.drawPixel(2, 7);
+                this.drawPixel(1, 7);
+                this.drawPixel(0, 7);
+                this.drawPixel(0, 6);
+                this.drawPixel(1, 5);
+                this.drawPixel(2, 5);
+                this.drawPixel(3, 4);
+                this.drawPixel(3, 3);
+                this.drawPixel(2, 3);
+                this.drawPixel(1, 3);
+                this.drawPixel(0, 3);
+                break;
             case '0':
                 this.drawPixel(1, 0);
                 this.drawPixel(2, 0);
@@ -691,44 +1001,25 @@ class Board
         }
     }
 
-    drawText(text, color = 'white', textWrap = false)
-    {
+    drawText(text, color = 'white', textWrap = false) {
         this.#ctx.fillStyle = color;
-        if (textWrap)
-        {
-            let textArray = text.split(" ");
-            for (let i = 0; i < textArray.length; i++){
-                if (this.width - this.padding - (this.#countWordWidth(textArray[i]) + this.xPos) < 0)
-                {
-                    this.xPos = this.padding;
-                    this.yPos += this.pixel * 9;
-                    for (let j = 0; j < textArray[i].length; j++)
-                    {
-                        this.drawChar(textArray[i][j]);
-                        this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
-                    }
-                }
-                else
-                {
-                    for (let j = 0; j < textArray[i].length; j++)
-                    {
-                        this.drawChar(textArray[i][j]);
-                        this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
-                    }
-                }
-                this.drawChar(' ');
-                this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
+        let textArray = textWrap ? text.split(" ") : [text];
+        
+        for (let i = 0; i < textArray.length; i++) {
+            if (textWrap && this.xPos + this.#countWordWidth(textArray[i]) > this.width - this.padding) {
+                this.xPos = this.padding;
+                this.yPos += this.pixel * this.lineSpacing;
             }
-        }
-        else
-        {
-            for (let i = 0; i < text.length; i++)
-            {
-                this.drawChar(text[i]);
-                this.xPos += this.pixel * (this.#alphabetMapping[text[i]] + 2);
+            
+            for (let j = 0; j < textArray[i].length; j++) {
+                this.drawChar(textArray[i][j]);
+                this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
             }
+            
+            this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
         }
     }
+
     #countWordWidth(word)
     {
         let width = 0;
