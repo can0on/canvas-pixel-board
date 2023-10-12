@@ -9,15 +9,16 @@ class Board
     constructor(id){
         this.#canvas = document.getElementById(id);
         /** @type {CanvasRenderingContext2D} */
-        this.#ctx = this.#canvas.getContext("2d");
-        this.#ctx.fillStyle = "#1b1b1b";
-        this.#ctx.fillRect(0, 0, 500, 500);
-        this.pixel = 6;
-        this.xPos = this.pixel * 1;
-        this.yPos = this.pixel * 1;
         this.width = this.#canvas.width;
         this.height = this.#canvas.height;
-
+        this.#ctx = this.#canvas.getContext("2d");
+        this.#ctx.fillStyle = "#1b1b1b";
+        this.#ctx.fillRect(0, 0, this.width, this.height);
+        this.pixel = 5;
+        this.padding = this.pixel * 2;
+        this.xPos = this.padding;
+        this.yPos = this.padding;
+    
         // Mapping alphabet letters with their respective widths
         for (let i = 0; i < this.#alphabet.length; i++) {
             this.#alphabetMapping[this.#alphabet[i]] = Number(this.#letterWidth[i]);
@@ -690,15 +691,54 @@ class Board
         }
     }
 
-    drawText(text, color = 'white')
+    drawText(text, color = 'white', textWrap = false)
     {
         this.#ctx.fillStyle = color;
-        for (let i = 0; i < text.length; i++)
+        if (textWrap)
         {
-            this.drawChar(text[i]);
-            this.xPos += this.pixel * (this.#alphabetMapping[text[i]] + 2);
+            let textArray = text.split(" ");
+            for (let i = 0; i < textArray.length; i++){
+                if (this.width - this.padding - (this.#countWordWidth(textArray[i]) + this.xPos) < 0)
+                {
+                    this.xPos = this.padding;
+                    this.yPos += this.pixel * 9;
+                    for (let j = 0; j < textArray[i].length; j++)
+                    {
+                        this.drawChar(textArray[i][j]);
+                        this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
+                    }
+                }
+                else
+                {
+                    for (let j = 0; j < textArray[i].length; j++)
+                    {
+                        this.drawChar(textArray[i][j]);
+                        this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
+                    }
+                }
+                this.drawChar(' ');
+                this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
+            }
         }
+        else
+        {
+            for (let i = 0; i < text.length; i++)
+            {
+                this.drawChar(text[i]);
+                this.xPos += this.pixel * (this.#alphabetMapping[text[i]] + 2);
+            }
+        }
+    }
+
+    #countWordWidth(word)
+    {
+        let width = 0;
+        for (let i = 0; i < word.length; i++)
+        {
+            width += this.pixel * (this.#alphabetMapping[word[i]] + 2);
+        }
+        return width;
     }
 }
 const board = new Board("canvas");
-board.drawText("WIKTOR", "red");
+board.drawText("LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY", "red", true);
