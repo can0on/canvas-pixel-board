@@ -1,7 +1,7 @@
 class Board
 {
-    #alphabet =    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,';
-    #letterWidth = '44444444034444646444444445443433330220533334234242234144444444301';
+    #alphabet =    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;?!';
+    #letterWidth = '444444440344446464444444454434333302205333342342422341444444443010140';
     #alphabetMapping = {};
     #canvas;
     #ctx;
@@ -41,6 +41,37 @@ class Board
             case ',':
                 this.drawPixel(0, 7);
                 this.drawPixel(1, 6);
+                break;
+            case ':':
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 2);
+                break;            
+            case ';':
+                this.drawPixel(1, 2);
+                this.drawPixel(1, 4);
+                this.drawPixel(0, 5);
+                break;
+            case '?':
+                this.drawPixel(2, 7);
+                this.drawPixel(2, 5);
+                this.drawPixel(2, 4);
+                this.drawPixel(3, 3);
+                this.drawPixel(4, 2);
+                this.drawPixel(4, 1);
+                this.drawPixel(3, 0);
+                this.drawPixel(2, 0);
+                this.drawPixel(1, 0);
+                this.drawPixel(0, 1);
+                this.drawPixel(0, 2);
+                break;
+            case '!':
+                this.drawPixel(0, 7);
+                this.drawPixel(0, 5);
+                this.drawPixel(0, 4);
+                this.drawPixel(0, 3);
+                this.drawPixel(0, 2);
+                this.drawPixel(0, 1);
+                this.drawPixel(0, 0);
                 break;
             case 'A':
                 this.drawPixel(2, 0);
@@ -1018,6 +1049,7 @@ class Board
             
             this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
         }
+        return this;
     }
 
     #countWordWidth(word)
@@ -1028,5 +1060,26 @@ class Board
             width += this.pixel * (this.#alphabetMapping[word[i]] + 2);
         }
         return width;
+    }
+
+    goToNextLine() {
+        this.xPos = this.padding;
+        this.yPos += this.pixel * this.lineSpacing;
+    }
+
+    input(){
+        let text = '';
+        let keyService = (e) => {
+            if (e.key != 'Enter') {
+                this.drawChar(e.key);
+                this.xPos += this.pixel * (this.#alphabetMapping[e.key] + 2);
+                text += e.key;
+            }
+            else{
+                document.removeEventListener('keydown', keyService);
+                this.goToNextLine();
+            }
+        };
+        document.addEventListener('keydown', keyService);
     }
 }
