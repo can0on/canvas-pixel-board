@@ -1082,4 +1082,19 @@ class Board
         };
         document.addEventListener('keydown', keyService);
     }
+    drawFrame()
+    {
+        this.xPos = 0;
+        this.yPos = 0;
+        for (let i = 0; i < this.width / this.pixel; i++)
+        {
+            this.drawPixel(i, 0);
+            this.drawPixel(i, this.height / this.pixel - 1);
+        }
+        for (let i = 1; i < this.height / this.pixel - 1; i++)
+        {
+            this.drawPixel(0, i);
+            this.drawPixel(this.width / this.pixel - 1, i);
+        }
+    }
 }
