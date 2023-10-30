@@ -1032,23 +1032,73 @@ class Board
         }
     }
 
-    drawText(text, color = 'white', textWrap = false) {
-        this.#ctx.fillStyle = color;
-        let textArray = textWrap ? text.split(" ") : [text];
+    // drawText(text, color = 'white', textWrap = false) {
+    //     this.#ctx.fillStyle = color;
+    //     let textArray = textWrap ? text.split(" ") : [text];
         
-        for (let i = 0; i < textArray.length; i++) {
-            if (textWrap && this.xPos + this.#countWordWidth(textArray[i]) > this.width - this.padding) {
-                this.xPos = this.padding;
-                this.yPos += this.pixel * this.lineSpacing;
-            }
+    //     for (let i = 0; i < textArray.length; i++) {
+    //         if (textWrap && this.xPos + this.#countWordWidth(textArray[i]) > this.width - this.padding) {
+    //             this.xPos = this.padding;
+    //             this.yPos += this.pixel * this.lineSpacing;
+    //         }
             
-            for (let j = 0; j < textArray[i].length; j++) {
-                this.drawChar(textArray[i][j]);
-                this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
-            }
+    //         for (let j = 0; j < textArray[i].length; j++) {
+    //             this.drawChar(textArray[i][j]);
+    //             this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
+    //         }
             
-            this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
+    //         this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
+    //     }
+    //     return this;
+    // }
+
+    drawText(text, color = 'white', align = 'center') {
+        this.#ctx.fillStyle = color;
+        let textArray = text.split(" ");
+        let arr = []
+        let temp = 0;
+        let start = 0;
+        let s = 0;
+        for (let i = 0; i < textArray.length; i++)
+        {
+            if ((temp + this.#countWordWidth(textArray[i]) < this.width - this.padding))
+            {
+                temp += this.#countWordWidth(textArray[i]) + this.pixel * (this.#alphabetMapping[' '] + 2);
+                s++;
+                if (i == textArray.length - 1)
+                {
+                    arr.push([start, start + s - 1, temp]);
+                }
+            }
+            else
+            {
+                arr.push([start, start + s - 1, temp]);
+                start += s;
+                s = 0;
+                temp = 0;
+                i--;
+            }
         }
+        
+        for (let k = 0; k < arr.length; k++)         
+        {
+            if (align == 'center')
+                this.xPos = this.padding + ((this.width - arr[k][2]) / 2);
+            else if (align == 'left')
+                this.xPos = this.padding;
+            else if (align == 'right')
+                this.xPos = this.padding + this.width - arr[k][2];
+            for (let i = arr[k][0]; i <= arr[k][1]; i++) 
+            {            
+                for (let j = 0; j < textArray[i].length; j++) {
+                    this.drawChar(textArray[i][j]);
+                    this.xPos += this.pixel * (this.#alphabetMapping[textArray[i][j]] + 2);
+                }
+                this.xPos += this.pixel * (this.#alphabetMapping[' '] + 2);
+            }
+            this.xPos = this.padding;
+            this.yPos += this.pixel * this.lineSpacing;
+        } 
         return this;
     }
 
@@ -1062,9 +1112,9 @@ class Board
         return width;
     }
 
-    goToNextLine() {
+    goToNextLine(lines) {
         this.xPos = this.padding;
-        this.yPos += this.pixel * this.lineSpacing;
+        this.yPos += (this.pixel * this.lineSpacing);
     }
 
     input(){
